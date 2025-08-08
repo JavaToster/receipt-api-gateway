@@ -1,0 +1,23 @@
+server:
+  port: ${port:****}
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: auth-user-service
+              uri: ${auth_url:****}
+              predicates:
+                - Path=/auth/**
+                - Method=GET,POST,PUT,DELETE
+
+            - id: receipt-service
+              uri: ${receipt_url:****}
+              predicates:
+                - Path=/receipt/**
+                - Method=GET,POST,PUT,DELETE
