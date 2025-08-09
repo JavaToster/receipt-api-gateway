@@ -1,5 +1,5 @@
 server:
-  port: ${port:****}
+  port: ${SERVER_PORT}
 
 spring:
   application:
@@ -10,14 +10,20 @@ spring:
       server:
         webflux:
           routes:
-            - id: auth-user-service
-              uri: ${auth_url:****}
+            - id: auth-service
+              uri: ${AUTH_URL}
               predicates:
                 - Path=/auth/**
                 - Method=GET,POST,PUT,DELETE
 
+            - id: user-service
+              uri: ${USER_URL}
+              predicates:
+                - Path=/users/**
+                - Method=GET,POST,PUT,DELETE
+
             - id: receipt-service
-              uri: ${receipt_url:****}
+              uri: ${RECEIPT_URL}
               predicates:
                 - Path=/receipt/**
                 - Method=GET,POST,PUT,DELETE
